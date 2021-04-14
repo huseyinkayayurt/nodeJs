@@ -5,10 +5,13 @@ const port = 3000;
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const dishRouter = require('./routes/dishRouter');
 
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
+
+app.use('/dishes', dishRouter);
 
 app.all('/dishes', (req, res, next) => {
     res.statusCode = 200;
